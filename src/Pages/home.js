@@ -1,48 +1,43 @@
 import { Box } from "@mui/material";
 import axios from "axios";
+import Controller from "../Controller/controller";
+import { useEffect, useState } from "react";
 
 export default function Home() {
 
+  const [bookData, setBookData] = useState([]);
+  const [error, setError] = useState(null);
 
-const bookData = async(isbn) => {
-    try{
-        const result = await axios.get(`https://openlibrary.org/api/books`,{
-            params: {
-                bibkeys: `ISBN:${isbn}`,
-                format: 'json',
-                jscmd: 'data'
-              }
-        });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://openlibrary.org/subjects/science_fiction.json?limit=10');
+        setBookData(response.data.works);
+      } catch (error) {
+        setError(error);
+      }
+    };
 
-    // const bookData = result.data[`ISBN:${isbn}`];
-    console.log(result);
-  } catch (error) {
-    console.error('Error fetching book data:', error);
-  }
-}
+    fetchData();
+  }, []);
 
-const isbn = '0451526538';
-bookData(isbn);
-
-    document.title="Digi Library";
+  console.log("bookData", bookData)
   return (
-    <Box sx={{backgroundColor:"#000", height: "96.5vh"}}>
+    <Box sx={{height: '96.5vh' }}>
       <Box>
-        Loreum Ipsium Loreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum Ipsium
+        <h2>Science Fiction Books</h2>
+        {bookData.length > 0 ? (
+          <ul>
+            {bookData.map((book, index) => (
+              <li key={index}>{book.title}</li>
+            ))}
+          </ul>
+        ) : (
+          <div>Loading...</div>
+        )}
+        {error && <div>Error: {error.message}</div>}
       </Box>
-      <Box>
-        Loreum Ipsium Loreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum IpsiumLoreum
-        IpsiumLoreum IpsiumLoreum Ipsium
-      </Box>
+      <Box>{/* Other content */}</Box>
     </Box>
   );
 }
