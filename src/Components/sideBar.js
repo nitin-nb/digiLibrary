@@ -23,28 +23,30 @@ export default function Sidebar() {
       alt="logo"
       sx={{ width: '100%', marginBottom: 2 }}
     />
+    <Box sx={{height:"100%", backgroundColor:"black", color:"white"}}>
     <List>
-      <ListItem button>
-      <ListItemIcon><GradeIcon color="action"/></ListItemIcon>
+      <ListItem button sx={{minWidth: 230}}>
+      <ListItemIcon sx={{minWidth: 40}}><GradeIcon sx={{color:"white"}}/></ListItemIcon>
         <ListItemText primary="Top Rated" />
       </ListItem>
-      <ListItem button>
-      <ListItemIcon><WhatshotIcon /></ListItemIcon>
+      <ListItem button sx={{minWidth: 230}}>
+      <ListItemIcon sx={{minWidth: 40}}><WhatshotIcon sx={{color:"white"}}/></ListItemIcon>
         <ListItemText primary="Trending" />
       </ListItem>
-      <ListItem button>
-      <ListItemIcon><OpenInBrowserIcon /></ListItemIcon>
+      <ListItem button sx={{minWidth: 230}}>
+      <ListItemIcon sx={{minWidth: 40}}><OpenInBrowserIcon sx={{color:"white"}}/></ListItemIcon>
         <ListItemText primary="Latest" />
       </ListItem>
-      <ListItem button>
-      <ListItemIcon><FeaturedPlayListIcon /></ListItemIcon>
+      <ListItem button sx={{minWidth: 230}}>
+      <ListItemIcon sx={{minWidth: 40}}><FeaturedPlayListIcon sx={{color:"white"}}/></ListItemIcon>
         <ListItemText primary="Featured" />
       </ListItem>
-      <ListItem button>
-        <ListItemIcon><RecommendIcon /></ListItemIcon>
+      <ListItem button sx={{minWidth: 230}}>
+        <ListItemIcon sx={{minWidth: 40}}><RecommendIcon sx={{color:"white"}}/></ListItemIcon>
         <ListItemText primary="Recommended" />
       </ListItem>
     </List>
+    </Box>
   </Box>
   );
 }
